@@ -1,5 +1,27 @@
 {
   "dependencies": {
-    "express": "^4.17.3"
-  }
+    "express": "^4.17.3",
+    "express-validators": "^1.0.4",
+    "nodemon": "^2.0.15"
+  },
+  "name": "verteilte_systeme_kochbuch_gruppe3",
+  "description": "Kochbuch",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Patorix/Verteilte_Systeme_Kochbuch_Gruppe3.git"
+  },
+  "keywords": [
+    "Kochbuch"
+  ],
+  "author": "Patrick Ochs, Daniel Volk, Sebastian Braun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Patorix/Verteilte_Systeme_Kochbuch_Gruppe3/issues"
+  },
+  "homepage": "https://github.com/Patorix/Verteilte_Systeme_Kochbuch_Gruppe3#readme"
 }
