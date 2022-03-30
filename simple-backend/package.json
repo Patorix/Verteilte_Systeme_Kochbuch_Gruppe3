@@ -9,8 +9,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "test",
-    "start": "nodemon index.js"
+    "start": "nodemon -L src/index.js",
+    "d-up": "docker-compose up --build"
   },
   "repository": {
     "type": "git",
