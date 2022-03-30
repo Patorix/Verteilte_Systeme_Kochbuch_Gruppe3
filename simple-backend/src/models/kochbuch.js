@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
-const kochbuchSchema = new mongoose.Schema({
+const rezeptSchema = new mongoose.Schema({
     rezept: String,
     dauer: String,
     zubereitung: String,
     schwierigkeitsgrad: Number,
 });
 
-export const Kochbuch = mongoose.model("Kochbuch", kochbuchSchema);
+export const Rezept = mongoose.model("Rezept", rezeptSchema);

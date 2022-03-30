@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import swaggerUi from "swagger-ui-express";
 
-import kochbuchRoutes from "./routes/bookRoutes.js";
+import kochbuchRoutes from "./routes/bookRoutes.js.js";
 import swaggerDocs from "../swaggerDocs.js";
 
 // complete application is here

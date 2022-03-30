@@ -1,18 +1,18 @@
 import { check, validationResult } from "express-validator";
-import { Kochbuch } from "../models/kochbuch.js";
+import { Rezept } from "../models/kochbuch.js";
 
 export const getKochbuch = async (req, res) => {
-    const kb = await Kochbuch.find();
+    const kb = await Rezept.find();
     res.status(200).send(kb);
 };
 
 export const getRezeptById = async (req, res) => {
-    let kb = await Kochbuch.findById(req.params.id);
+    let kb = await Rezept.findById(req.params.id);
     res.status(200).send(kb);
 };
 
 export const getRezeptByTitle = async (req, res) => {
-    let result = await Kochbuch.find({ rezept: req.query.rezept });
+    let result = await Rezept.find({ rezept: req.query.rezept });
     res.status(200).send(result);
 };
 
@@ -21,7 +21,7 @@ export const addRezept = async (req, res) => {
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
-    const rzpt = new Kochbuch({
+    const rzpt = new Rezept({
         rezept: req.body.rezept,
         dauer: req.body.dauer,
         zubereitung: req.body.zubereitung,
