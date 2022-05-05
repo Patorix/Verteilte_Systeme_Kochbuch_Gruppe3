@@ -2,8 +2,6 @@ import React from "react";
 import { alleRezepte } from "./RestClient";
 
 class App extends React.Component {
-    // constructor initializes component state data
-    // and binds methods
     constructor(props) {
         super(props);
         this.state = {
@@ -12,15 +10,11 @@ class App extends React.Component {
         this.fetchDisplayData = this.fetchDisplayData.bind(this);
     }
 
-    // requests and waits for data by calling RestClient's
-    // fetchAllBooks. as soon as the data is there it is set
-    // as a state
     async fetchDisplayData() {
         let data = await alleRezepte();
         this.setState({ kochbuch: data });
     }
 
-    // this is displayed on the screen
     render() {
         return (
             <div>
@@ -29,10 +23,9 @@ class App extends React.Component {
                         Rezepte auflisten
                     </button>
                     <div className="data">
-                        {/* generates a div for every entry */}
-                        {this.state.kochbuch.map((Rezept, key) => (
+                        {this.state.kochbuch.map((kb, key) => (
                         <div key={key}>
-                            {Rezept.id}
+                            Rezept: {kb.rezept}, Dauer: {kb.dauer}
                         </div>
                     ))}
                 </div>

@@ -3,11 +3,17 @@ import { Zutaten } from "../models/zutaten.js";
 
 export const getZutaten = async (req, res) => {
     const zt = await Zutaten.find();
+    if(zt.length==0){
+        return res.status(400).send({error: "Keine Zutaten vorhanden"});
+    }
     res.status(200).send(zt);
 };
 
 export const getZutatenByRezept = async (req, res) => {
     let zt = await Zutaten.find({ rezept: req.params.rezept });
+    if(zt.length==0){
+        return res.status(400).send({error: `Keine Zutaten für ${req.params.rezept} vorhanden`});
+    }
     res.status(200).send(zt);
 };
 
@@ -15,6 +21,10 @@ export const addZutaten = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
+    }
+    let zt = await Zutaten.find({ rezept: req.body.rezept });
+    if(zt.length!=0){
+        return res.status(400).send({error: `Fuer ${req.body.rezept} bereits Zutaten enthalten`});
     }
     const zutaten = new Zutaten({
         rezept: req.body.rezept,
@@ -30,6 +40,10 @@ export const updateZutaten = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
+    }
+    let zt = await Zutaten.find({ rezept: req.params.rezept });
+    if(zt.length==0){
+        return res.status(400).send({error: `Zutaten fuer ${req.params.rezept} existieren nicht`});
     }
     const zutaten = new Zutaten({
         rezept: req.body.rezept,
@@ -52,6 +66,10 @@ export const updateZutaten = async (req, res) => {
 };
 
 export const deleteZutaten = async (req, res) => {
+    let zt = await Zutaten.find({ rezept: req.params.rezept });
+    if(zt.length==0){
+        return res.status(400).send({error: `Zutaten fuer ${req.params.rezept} existieren nicht`});
+    }
     await Zutaten.deleteOne(Zutaten.find({ rezept: req.params.rezept }));
     res.status(200).send("Geloescht");
 };

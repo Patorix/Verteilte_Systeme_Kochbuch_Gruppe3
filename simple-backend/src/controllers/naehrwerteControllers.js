@@ -3,11 +3,17 @@ import { NWerte } from "../models/naehrwerte.js";
 
 export const getNWerte = async (req, res) => {
     const nw = await NWerte.find();
+    if(nw.length==0){
+        return res.status(400).send({error: "Keine Naehrwerte vorhanden"});
+    }
     res.status(200).send(nw);
 };
 
 export const getNWerteByRezept = async (req, res) => {
     let nw = await NWerte.find({ rezept: req.params.rezept });
+    if(nw.length==0){
+        return res.status(400).send({error: `Keine Naehrwerte für ${req.params.rezept} vorhanden`});
+    }
     res.status(200).send(nw);
 };
 
@@ -15,6 +21,10 @@ export const addNWerte = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
+    }
+    let nw = await NWerte.find({ rezept: req.body.rezept });
+    if(nw.length!=0){
+        return res.status(400).send({error: `Fuer ${req.body.rezept} bereits Naehrwerte enthalten`});
     }
     const nwerte = new NWerte({
         rezept: req.body.rezept,
@@ -31,6 +41,10 @@ export const updateNWerte = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
+    }
+    let nw = await NWerte.find({ rezept: req.params.rezept });
+    if(nw.length==0){
+        return res.status(400).send({error: `Naehrwerte fuer ${req.params.rezept} existieren nicht`});
     }
     const nwerte = new NWerte({
         rezept: req.body.rezept,
@@ -55,6 +69,10 @@ export const updateNWerte = async (req, res) => {
 };
 
 export const deleteNWerte = async (req, res) => {
+    let nw = await NWerte.find({ rezept: req.params.rezept });
+    if(nw.length==0){
+        return res.status(400).send({error: `Naehrwerte fuer ${req.params.rezept} existieren nicht`});
+    }
     await NWerte.deleteOne(NWerte.find({ rezept: req.params.rezept }));
     res.status(200).send("Geloescht");
 };
