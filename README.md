@@ -19,7 +19,9 @@ Der Benutzer kann mit unserem entwickelten Service verschiedende Kochrezepte mit
 Gesamtarchitektur:
 
 1.1 Der Benutzer stellt eine Anfrage für ein Rezept, Zutaten oder Nährwerte (get) 
+
 1.2 Der Administrator kann Einträge bearbeiten, löschen oder neu hinzufügen (post, put und delete)
+
 2.1 Die Rest-API gibt die angefragten Daten zurück falls der Aufruf richtig war, andernsfalls wird ein Fehlrer zurückgegeben.
 
 2. Welche Probleme können entstehen, wenn der entwickelte Service von mehreren Parteien verwendet wird? Beschreibt zwei Probleme sowie mögliche Lösungen.
@@ -34,5 +36,6 @@ Lösung: Anzahl der gleichzeitigen Aufrufe zu beschränken, um dieses aufgeführ
 3. Was ist abseits der reinen Programmierung für die Produktivsetzung des entwickelten Services zu beachten? Nenne mindestens zwei Aspekte und führe diese in ein paar Sätzen aus.
 
 Das Programm sollte im Vorfeld ausreichend getestet sein, sodass mögliche Fehler frühzeitig erkannt werden und das Programm voll funktionsfähig ist. Zum Beispiel durch das Testen aller Requests um die funktionsfähigkeit dieser zu prüfen. Ebenso sollten auch falsche Eingaben getestet werden.
+
 Zudem sollte das Systemumfeld, also Speicherkapazität, Rechenleistung etc., ebenfalls getestet und funktionsfähig sein und dazu in der Lage sein alle Aufrufe zu verarbeiten.
 
