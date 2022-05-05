@@ -3,23 +3,22 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import swaggerUi from "swagger-ui-express";
 
-import kochbuchRoutes from "./routes/bookRoutes.js.js";
+import kochbuchRoutes from "./routes/kochbuchRoutes.js";
+import nwerteRoutes from "./routes/naehrwerteRoutes.js";
+import zutatenRoutes from "./routes/zutatenRoutes.js";
 import swaggerDocs from "../swaggerDocs.js";
 
-// complete application is here
 const app = express();
-const port = 3000;
+const port = 4000;
 
-// app uses json
 app.use(bodyParser.json());
 
-// only book routes and documentation is valid
-// everything else throws a 404
-app.use("/kochbuch/rezept", kochbuchRoutes);
+app.use("/kochbuch/rezepte", kochbuchRoutes);
+app.use("/kochbuch/zutaten", zutatenRoutes);
+app.use("/kochbuch/naehrwerte", nwerteRoutes);
 app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.all("*", (req, res) => res.sendStatus(404));
 
-// connect to database
 mongoose.connect("mongodb://mongo:27017/test").then(() => {
     console.log("Database connected");
 });
