@@ -8,100 +8,31 @@ APi für ein Kochbuch. Es werden mehrere Rezepte auf der Datenbank gespeichert. 
 
 Dozentin: Lisa Trovato-Monastra
 
-# Endpoint 1
+**WICHTIG:**  Wir haben dieses Projekt wie in der Aufgabe gefordert zusammen erledigt und alles gemeinsam von einem Rechner bearbeitet.
 
-URL: /kochbuch/rezept/
+# Prüfungsfragen
 
-Beispiel: /kochbuch/rezept/?rezept_id=0
+1. Beschreibt ein konkretes Anwendungsszenario für den entwickelten Service und schildert (in wenigen Worten) eine mögliche Gesamt-Architektur in welcher sich dieser befinden könnte.
 
-Parameter: rezept_id (int) (GET)
+Der Benutzer kann mit unserem entwickelten Service verschiedende Kochrezepte mit der enstsprechenden Zubereitung ansehen. Darüber hinaus kann sich der Benutzer auch die Nährwerte und Zutaten des Gerichtes anzeigen lassen, sowie den jeweiligen Schwierigkeitsgrad und die Zubereitungsdauer. Damit findet jeder das passende Rezept für seinen Geschmack und Kochskills und hat gleichzeitg noch die Nährwerte und Kalorien im Blick.
 
-Response-Type: application/json
+Gesamtarchitektur:
 
-Response-Content:
-{
-    "rezept": "Wiener Schnitzel"
-    "dauer": "30 min"
-    "zubereitung": "1. Schnitzel zwischen Frischhaltefolie behutsam klopfen. Fleisch beidseitig salzen, in Mehl wenden,abklopfen, durch die Eier ziehen und in den Bröseln wenden.
-    2. Schnitzel ca. 2 Finger hoch Backfett goldgelb backen. Während des Backens die Pfanne ein wenig rütteln, damit die Schnitzel gleichmäßig goldbraun werden. Schnitzel herausheben, auf Küchenpapier abtropfen lassen.
-    3. Zitrone in Spalten schneiden und die fertigen Wiener Schnitzel mit Zitronenspalten garnieren."
-    "schwierigkeitsgrad": 2
-}
+1.1 Der Benutzer stellt eine Anfrage für ein Rezept, Zutaten oder Nährwerte (get) 
+1.2 Der Administrator kann Einträge bearbeiten, löschen oder neu hinzufügen (post, put und delete)
+2.1 Die Rest-API gibt die angefragten Daten zurück falls der Aufruf richtig war, andernsfalls wird ein Fehlrer zurückgegeben.
 
-Method (POST): rezept (string), dauer (string), zubereitung (string), schwierigkeitsgrad (int)
+2. Welche Probleme können entstehen, wenn der entwickelte Service von mehreren Parteien verwendet wird? Beschreibt zwei Probleme sowie mögliche Lösungen.
 
-Response-Type: application/json
+Problem 1: Wenn man versucht mehrere Daten gleichzeitug einzupflegen, kann es dazu führen, dass die Datenbank nicht alle Anfragen bearbeiten kann. Dadurch kann es passieren, dass nicht alle Daten die eingepflegt werden sollten auch in der Datenbank vorhanden sind. 
+Lösung: Es sollte nur eine Person zur gleichen Zeit Daten einpflegen, damit es nicht zu diesem geschilderten Problem kommt.
 
-Response-Content:
-"rezept_id": 10
+Problem 2: Es könnte zu einer Überlastung der Datenbank durch eine hohe Anzahl an Aufrufen kommen. Dadurch kann die Datenbank diese Aufrufe nicht mehr verarbeiten und im schlimmsten Fall könnte es dazu kommen, dass diese Abstürzt.
+Lösung: Anzahl der gleichzeitigen Aufrufe zu beschränken, um dieses aufgeführte Problem zu vermeiden.
 
-# Endpoint 2
 
-URL: /kochbuch/zutaten/
+3. Was ist abseits der reinen Programmierung für die Produktivsetzung des entwickelten Services zu beachten? Nenne mindestens zwei Aspekte und führe diese in ein paar Sätzen aus.
 
-Beispiel: /kochbuch/zutaten/?r=Schnitzel
-
-Parameter: r (string) (GET)
-
-Response-Type: application/json
-
-Response-Content:
-
-{
-"zutaten_2P": " 2  Stk	Kalbsschnitzel (à 160 g) 
-            1/2	Prise	Salz
-            75	g	griffiges Mehl
-            1	Stk	Eier
-            150	g	Semmelbrösel
-            1/2	Pk	Backfett, Öl od. Butterschmalz
-            1/2	Stk	Zitrone"
-
-"zutaten_4P": " 4  Stk Kalbsschnitzel (à 160 g) 
-            1	Prise	Salz
-            150	g	griffiges Mehl
-            2	Stk	Eier
-            300	g	Semmelbrösel
-            1   Pk	Backfett, Öl od. Butterschmalz
-            1	Stk	Zitrone"
-        
-"zutaten_8P": " 8  Stk Kalbsschnitzel (à 160 g) 
-            1	Prise	Salz
-            300	g	griffiges Mehl
-            4	Stk	Eier
-            600	g	Semmelbrösel
-            2   Pk	Backfett, Öl od. Butterschmalz
-            2	Stk	Zitrone"
-}
-
-Method (POST): zutaten_2P (string[]), zutaten_4P (string[]), zutaten_8P (string[])
-
-Response-Type: application/json
-
-Response-Content:
-
-"success":true 
-
-# Endpoint 3
-
-URL: /kochbuch/nährwerte/
-
-Beispiel: /kochbuch/nährwerte/?r=Schnitzel
-
-Parameter: r (string) (GET)
-
-Response-Type: application/json
-
-Response-Content:
-
-"kalorien":         "521 kcal pro Portion"
-"kohlenhydrate":    "66,12 g pro Portion"
-"fett"              "7,93 g pro Portion"
-"eiweiß"            "44,86 g pro Portion"
-
-Method (POST): kalorien (string), kohlenhydrate (string), "fett" (string), eiweiß (string)
-
-Response-Type: application/json
-
-Response-Content:
-"success":true
+Das Programm sollte im Vorfeld ausreichend getestet sein, sodass mögliche Fehler frühzeitig erkannt werden und das Programm voll funktionsfähig ist. Zum Beispiel durch das Testen aller Requests um die funktionsfähigkeit dieser zu prüfen. Ebenso sollten auch falsche Eingaben getestet werden.
+Zudem sollte das Systemumfeld, also Speicherkapazität, Rechenleistung etc., ebenfalls getestet und funktionsfähig sein und dazu in der Lage sein alle Aufrufe zu verarbeiten.
 
