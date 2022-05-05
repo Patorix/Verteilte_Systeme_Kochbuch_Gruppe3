@@ -24,6 +24,7 @@ Gesamtarchitektur:
 
 2.1 Die Rest-API gibt die angefragten Daten zurück falls der Aufruf richtig war, andernsfalls wird ein Fehlrer zurückgegeben.
 
+
 2. Welche Probleme können entstehen, wenn der entwickelte Service von mehreren Parteien verwendet wird? Beschreibt zwei Probleme sowie mögliche Lösungen.
 
 Problem 1: Wenn man versucht mehrere Daten gleichzeitug einzupflegen, kann es dazu führen, dass die Datenbank nicht alle Anfragen bearbeiten kann. Dadurch kann es passieren, dass nicht alle Daten die eingepflegt werden sollten auch in der Datenbank vorhanden sind. 
@@ -31,6 +32,7 @@ Lösung: Es sollte nur eine Person zur gleichen Zeit Daten einpflegen, damit es 
 
 Problem 2: Es könnte zu einer Überlastung der Datenbank durch eine hohe Anzahl an Aufrufen kommen. Dadurch kann die Datenbank diese Aufrufe nicht mehr verarbeiten und im schlimmsten Fall könnte es dazu kommen, dass diese Abstürzt.
 Lösung: Anzahl der gleichzeitigen Aufrufe zu beschränken, um dieses aufgeführte Problem zu vermeiden.
+
 
 
 3. Was ist abseits der reinen Programmierung für die Produktivsetzung des entwickelten Services zu beachten? Nenne mindestens zwei Aspekte und führe diese in ein paar Sätzen aus.
